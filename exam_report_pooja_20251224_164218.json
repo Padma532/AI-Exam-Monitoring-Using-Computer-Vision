@@ -1,0 +1,53 @@
+{
+  "student": "pooja",
+  "start_time": "2025-12-24T16:41:48.531916",
+  "end_time": "2025-12-24T16:42:18.555331",
+  "total_alerts": 5,
+  "alerts": [
+    {
+      "type": "emotion_change",
+      "severity": "medium",
+      "message": "Happy increased significantly (63.0% vs 0.3%)",
+      "frame": 1
+    },
+    {
+      "type": "emotion_change",
+      "severity": "medium",
+      "message": "Sad increased significantly (56.4% vs 28.0%)",
+      "frame": 89
+    },
+    {
+      "type": "emotion_change",
+      "severity": "medium",
+      "message": "Sad increased significantly (59.0% vs 28.0%)",
+      "frame": 170
+    },
+    {
+      "type": "head_movement",
+      "severity": "medium",
+      "message": "Significant head movement detected (81.3 pixels)",
+      "frame": 172
+    },
+    {
+      "type": "emotion_change",
+      "severity": "medium",
+      "message": "Fear increased significantly (36.4% vs 3.0%)",
+      "frame": 260
+    }
+  ],
+  "baseline": {
+    "head_center": [
+      422.3382352941176,
+      343.54411764705884
+    ],
+    "avg_emotions": {
+      "angry": 3.7803783416748047,
+      "disgust": 0.0036594984121620655,
+      "fear": 3.033156394958496,
+      "happy": 0.2875012159347534,
+      "sad": 28.023643493652344,
+      "surprise": 0.0028298560064285994,
+      "neutral": 64.86882781982422
+    }
+  }
+}

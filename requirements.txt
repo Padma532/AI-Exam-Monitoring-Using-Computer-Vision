@@ -1,0 +1,9 @@
+opencv-python
+numpy
+pandas
+scikit-learn
+streamlit
+deepface
+ultralytics
+python-dotenv
+sounddevice

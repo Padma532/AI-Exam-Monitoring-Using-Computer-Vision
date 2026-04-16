@@ -1,0 +1,68 @@
+{
+  "student": "pooja",
+  "start_time": "2025-12-24T14:27:26.854682",
+  "end_time": "2025-12-24T14:27:56.944162",
+  "total_alerts": 9,
+  "alerts": [
+    {
+      "type": "head_movement",
+      "severity": "medium",
+      "message": "Significant head movement detected (25.3 pixels)",
+      "frame": 2
+    },
+    {
+      "type": "emotion_change",
+      "severity": "medium",
+      "message": "Angry increased significantly (41.9% vs 9.8%)",
+      "frame": 2
+    },
+    {
+      "type": "head_movement",
+      "severity": "medium",
+      "message": "Significant head movement detected (47.7 pixels)",
+      "frame": 60
+    },
+    {
+      "type": "head_movement",
+      "severity": "high",
+      "message": "Significant head movement detected (62.7 pixels)",
+      "frame": 119
+    },
+    {
+      "type": "emotion_change",
+      "severity": "medium",
+      "message": "Sad increased significantly (59.6% vs 29.8%)",
+      "frame": 130
+    },
+    {
+      "type": "head_movement",
+      "severity": "high",
+      "message": "Significant head movement detected (56.7 pixels)",
+      "frame": 179
+    },
+    {
+      "type": "emotion_change",
+      "severity": "medium",
+      "message": "Sad increased significantly (59.6% vs 29.8%)",
+      "frame": 190
+    },
+    {
+      "type": "head_movement",
+      "severity": "high",
+      "message": "Significant head movement detected (64.2 pixels)",
+      "frame": 240
+    },
+    {
+      "type": "head_movement",
+      "severity": "high",
+      "message": "Significant head movement detected (60.0 pixels)",
+      "frame": 299
+    }
+  ],
+  "baseline": {
+    "head_center": [
+      392.67816091954023,
+      372.6666666666667
+    ],
+    "avg_emotions": {
+      "angry": 
