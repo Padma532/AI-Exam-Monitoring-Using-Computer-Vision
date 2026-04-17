@@ -261,8 +261,7 @@ class StreamlitExamMonitor:
 
             try:
                res = {"dominant_emotion": "Not available"}
-                if isinstance(res, list):
-                    res = res[0]
+                
                 reg  = res["region"]
                 x, y, w, h = reg["x"], reg["y"], reg["w"], reg["h"]
                 if w > 0 and h > 0:
