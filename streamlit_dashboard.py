@@ -13,7 +13,6 @@ from streamlit_javascript import st_javascript
 import streamlit as st
 import streamlit.components.v1 as components
 import cv2
-from deepface import DeepFace
 import numpy as np
 import time
 import json
@@ -261,8 +260,7 @@ class StreamlitExamMonitor:
             progress  = min(elapsed / duration, 1.0)
 
             try:
-                res = DeepFace.analyze(frame, actions=["emotion"],
-                                       enforce_detection=False, silent=True)
+               res = {"dominant_emotion": "Not available"}
                 if isinstance(res, list):
                     res = res[0]
                 reg  = res["region"]
@@ -389,11 +387,8 @@ class StreamlitExamMonitor:
             face_present = False
             df_result    = None
             try:
-                df_result = DeepFace.analyze(frame, actions=["emotion"],
-                                             enforce_detection=False, silent=True)
-                if isinstance(df_result, list):
-                    df_result = df_result[0]
-                face_present = self._face_present(frame, df_result)
+                df_result = None
+                face_present = True  # assume face present (simple version)
             except Exception:
                 face_present = False
                 df_result    = None
@@ -476,9 +471,12 @@ class StreamlitExamMonitor:
 
             # ── Draw overlays ─────────────────────────────────────────────
             if face_present and df_result is not None:
-                reg  = df_result["region"]
-                x, y, w, h = reg["x"], reg["y"], reg["w"], reg["h"]
-                dominant   = df_result.get("dominant_emotion", "")
+                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                faces = self.face_cascade.detectMultiScale(gray, 1.3, 5)
+
+                for (x, y, w, h) in faces:
+                    cv2.rectangle(frame, (x, y), (x+w, y+h), (0,255,0), 2)
+                dominant = "Disabled"
                 box_color  = (0, 0, 255) if current_alerts else (0, 255, 0)
                 cv2.rectangle(frame, (x, y), (x + w, y + h), box_color, 2)
                 label = "⚠ ALERT" if current_alerts else "✓ Normal"
@@ -693,6 +691,7 @@ class StreamlitExamMonitor:
             self._log(term, frame_number, elapsed, timeline)
             self._play_beep()
             return True
+
         return False
 
     def _log(self, alert, frame_number, elapsed, timeline):
