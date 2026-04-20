@@ -260,18 +260,18 @@ class StreamlitExamMonitor:
             progress  = min(elapsed / duration, 1.0)
 
             try:
-               res = {"dominant_emotion": "Not available"}
-                
-                reg  = res["region"]
-                x, y, w, h = reg["x"], reg["y"], reg["w"], reg["h"]
-                if w > 0 and h > 0:
+                gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+                faces = self.face_cascade.detectMultiScale(gray, 1.3, 5)
+                for (x, y, w, h) in faces:
                     head_positions.append([x + w // 2, y + h // 2])
-                    emotions_collected.append(res["emotion"])
-                    cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                    cv2.rectangle(frame, (x, y), (x+w, y+h), (0,255,0), 2)
+
                 cv2.putText(frame, f"CALIBRATING: {remaining}s",
-                            (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+                        (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
                 cv2.putText(frame, f"Captured {len(head_positions)} frames",
-                            (10, 65), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                        (10, 65), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+
+            
             except Exception:
                 cv2.putText(frame, "No face – please look at camera",
                             (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
@@ -296,8 +296,7 @@ class StreamlitExamMonitor:
             pos = np.array(head_positions)
             self.baseline["head_center"]  = np.mean(pos, axis=0)
             self.baseline["head_std"]     = np.std(pos, axis=0)
-            avg_em = {k: float(np.mean([e[k] for e in emotions_collected]))
-                      for k in emotions_collected[0]}
+            avg_em = {}
             self.baseline["avg_emotions"]  = avg_em
             self.baseline["is_calibrated"] = True
             return True, len(head_positions)
